@@ -39,6 +39,8 @@ addbots();
 var incr = 0.01
 var sur_r = 2.5;
 var sad_r = 2.1;
+var anger_r=1.5;
+var anger_sr = 0.5;
 function animate() {
 	requestAnimationFrame( animate );
 	emotion = document.getElementById('emotion').value;
@@ -53,7 +55,35 @@ function animate() {
 			i += 1;
 		});
     }
-    else if(emotion==="surprise"){
+	else if(emotion==="anger"){
+		
+		var step = 2*Math.PI / 8;
+		var i = 0;
+		cubes.forEach(cube=>{
+			cube.position.x = anger_r*Math.cos(i*step) ;
+			cube.position.y = anger_r*Math.sin(i*step) ;
+			i += 1;
+			if(i>=8)
+				break;
+		});
+
+		for(i;i<11;i++){
+			cubes[i].position.x = anger_sr*Math.cos(i*step) ;
+			cubes[i].position.y = anger_sr*Math.sin(i*step) ;
+		}
+
+		cubes[i].position.x = 0 ;
+		cubes[i].position.y = 0 ;
+		
+		sur_r += incr;
+		if(sur_r>4){
+			incr = -incr;
+		}
+		else if(sur_r<2){
+			incr = -incr;
+		} 
+    }
+    else if(emotion==="surpris"){
 		t+=0.005
 		var step = 2*Math.PI / 12;
 		var i = 0;
@@ -72,6 +102,7 @@ function animate() {
 			incr = -incr;
 		} 
     }
+	
 		/*
 	t += 0.01;          
 	 // These to strings make it work*/
