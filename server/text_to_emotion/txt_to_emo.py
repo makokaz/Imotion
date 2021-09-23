@@ -105,18 +105,3 @@ def generate_emo(txt):
             res.append('Anger')
     
     return res
-
-app = Flask(__name__)
-@app.route('/')
-def home():
-    return render_template('home.html')
-
-@app.route('/res', methods=['GET'])
-def txt_to_emo():
-    text = 'She seems very happy in the picture, and you want to know\n what what is behind the smile.'
-    preds = preprocess(text)
-    response = generate_emo(preds)
-    return jsonify(result=response)
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
