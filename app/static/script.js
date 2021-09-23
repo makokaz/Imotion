@@ -120,7 +120,6 @@ function animate() {
 		} 
     }
 	else if(emotion==="happiness"){
-		// t+=0.5
 		sinx+=0.005
 		sinx=sinx%(2*Math.PI);
 		var step = 2*Math.PI / num_bots;
@@ -131,14 +130,7 @@ function animate() {
 			cube.rotation.z = Math.atan2( cube.position.y, cube.position.x ) ;
 			i += 1;
 		});
-		
-		sur_r += incr;
-		if(sur_r>4){
-			incr = -incr;
-		}
-		else if(sur_r<2){
-			incr = -incr;
-		} 
+		 
     }
 	
 	renderer.render( scene, camera );
