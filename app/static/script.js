@@ -10,8 +10,7 @@ const geometry = new THREE.BoxGeometry(0.7,0.7,0.4);
 const material = new THREE.MeshLambertMaterial( { color: 0x00df00 } );
 var cubes = []
 const cube = new THREE.Mesh( geometry, material );
-cube.position.x = 6
-//scene.add( cube );
+cube.position.x = 6;
 
 var light = new THREE.PointLight(0xFFFF00);
 light.position.set(5, 0, 35);
@@ -38,9 +37,11 @@ var r = maxr;
 addbots();
 var incr = 0.01
 var sur_r = 2.5;
+var hap_r = 2.5;
 var sad_r = 2.1;
-var anger_r=1.5;
-var anger_sr = 0.5;
+var anger_r=2;
+var anger_sr = 1;
+var sinx = 0;
 function animate() {
 	requestAnimationFrame( animate );
 	emotion = document.getElementById('emotion').value;
@@ -56,34 +57,53 @@ function animate() {
 		});
     }
 	else if(emotion==="anger"){
-		
+		// t+=0.005
 		var step = 2*Math.PI / 8;
 		var i = 0;
 		cubes.forEach(cube=>{
 			cube.position.x = anger_r*Math.cos(i*step) ;
 			cube.position.y = anger_r*Math.sin(i*step) ;
 			i += 1;
-			if(i>=8)
-				break;
 		});
-
-		for(i;i<11;i++){
+		cubes[4].position.x += 0.2 ;
+		cubes[4].position.y -= 0.3 ;
+		cubes[6].position.x += 0.5 ;
+		cubes[6].position.y += 0.3 ;
+		step = 2*Math.PI / 3;
+		for(i=8;i<11;i++){
 			cubes[i].position.x = anger_sr*Math.cos(i*step) ;
 			cubes[i].position.y = anger_sr*Math.sin(i*step) ;
+			step += i/30;
 		}
-
-		cubes[i].position.x = 0 ;
+		// console.log(cubes[i])
+		cubes[i].position.x = 0.4 ;
 		cubes[i].position.y = 0 ;
-		
-		sur_r += incr;
-		if(sur_r>4){
-			incr = -incr;
+		t+=0.05
+		sinx+=0.5
+		var step = 2*Math.PI / 12;
+		var i = 0;
+		var arr=[];
+		var ar = [];
+		for(var arr_i=0;arr_i<12; arr_i++){
+			for(var arr_j=0;arr_j<2; arr_j++){
+				ar.push(Math.random()*0.6);
+			}
+			arr.push(ar);
 		}
-		else if(sur_r<2){
-			incr = -incr;
-		} 
+		cubes.forEach(cube=>{
+			// sinx=sinx%(2*Math.PI);
+			// cube.position.x = hap_r*Math.cos(t + i*step) + sinx;
+			// cube.position.y = hap_r*Math.sin(t + i*step) + Math.sin(sinx);
+			// cube.rotation.z = Math.atan2( cube.position.y, cube.position.x ) ;
+			
+			cube.position.x += i;
+			cube.position.y += 0.5*Math.cos(t)*Math.sin(0.5);
+			cube.rotation.z = Math.atan2( cube.position.y, cube.position.x ) ;
+			i += 1;
+		});
+		
     }
-    else if(emotion==="surpris"){
+    else if(emotion==="surprise"){
 		t+=0.005
 		var step = 2*Math.PI / 12;
 		var i = 0;
@@ -102,10 +122,28 @@ function animate() {
 			incr = -incr;
 		} 
     }
+	else if(emotion==="happiness"){
+		// t+=0.5
+		sinx+=0.005
+		sinx=sinx%(2*Math.PI);
+		var step = 2*Math.PI / 12;
+		var i = 0;
+		cubes.forEach(cube=>{
+			cube.position.x = (3+0.5*Math.cos(10*sinx + i*(Math.PI)))*Math.cos(sinx+ i*step);
+			cube.position.y = (3+0.5*Math.cos(10*sinx + i*(Math.PI)))*Math.sin(sinx+ i*step);
+			cube.rotation.z = Math.atan2( cube.position.y, cube.position.x ) ;
+			i += 1;
+		});
+		
+		sur_r += incr;
+		if(sur_r>4){
+			incr = -incr;
+		}
+		else if(sur_r<2){
+			incr = -incr;
+		} 
+    }
 	
-		/*
-	t += 0.01;          
-	 // These to strings make it work*/
 	renderer.render( scene, camera );
 }
 animate();
