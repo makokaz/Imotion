@@ -108,16 +108,12 @@ def generate_emo(txt):
     
     return res
 
-app = Flask(__name__)
-CORS(app, supports_credentials=True)
+# @app.route('/')
+# def home():
+#     return render_template('home.html')
 
-@app.route('/')
-def home():
-    return render_template('home.html')
-
-@app.route('/res', methods=['GET'])
-def txt_to_emo():
-    text = 'She seems very happy in the picture, and you want to know\n what what is behind the smile.'
+def txt_to_emo(text):
+    # text = 'She seems very happy in the picture, and you want to know\n what what is behind the smile.'
     preds = preprocess(text)
     response = generate_emo(preds)
     return jsonify(result=response)

@@ -1,26 +1,68 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-	</head>
-	<body>
-		<div id="container" style="position:relative">
-		<div id="overlay" style="position:absolute; left:20px; top:10px;
+
+<head>
+	<meta charset="utf-8">
+	<title>My first three.js app</title>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container" style="position:relative">
+		<div id="overlay" style="position:absolute; left:30px; top:10px;
 		background-color: rgba(0, 0, 0, 0.7);
 		color: white;
 		font-family: monospace;
 		padding: 1em;">
-			<div><input id="emotion"/></div>
+			<form method="POST" id="img-submit">
+				<input type="file" name="file" id="file">
+				<button type="submit">submit image</button>
+			</form>
+			<div>
+				<img id="img" src="" art="" style="max-height: 60vh; max-width: 20vw; padding-top: 1em;">
+			</div>
 		</div>
+		<!--Jquery Cdn -->
+		<script src="https://code.jquery.com/jquery-3.5.1.js"
+			integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			$(document).on('submit', '#img-submit', function (e) {
+				e.preventDefault();
+				var oFReader = new FileReader();
+				var file = document.getElementById('file').files[0];
+				oFReader.readAsDataURL(file);
+				oFReader.onloadend = function (oFRevent) {
+					var src = oFRevent.target.result;
+					$('#img').attr('src', src);
+					var url = getObjectURL(file)
+					$.ajax({
+						type: 'POST',
+						url: '/',
+						data: {
+							img: $("#file").val()
+						},
+						success: function () {
+							alert('Submitted image! Robots will change behavior...');
+						}
+					})
+				}
+			});
+		</script>
 		<script src="{{url_for('static', filename='three.js')}}"></script>
 		<script src="{{url_for('static', filename='script.js')}}"></script>
 		<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
-			     
 		</script>
+	</div>
+	<div id="display"  style="position:absolute; left:40px; bottom: 100px;">
+		<div><h1 id="emotion">{{ emotion }}</h1></div>
+		<div style="height:5vh; width:10vw">
+			<p style="font-size: large; font-weight: 500;">{{ story }}</p>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>
