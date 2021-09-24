@@ -55,6 +55,7 @@ def load_speaker(args_file, model_ckp, with_data=False, override_args=None, verb
 
     # Prepare empty model
     vocab = Vocabulary.load('./server/preprocessed/vocabulary.pkl')
+    
     print('Using a vocabulary of size', len(vocab))
     model = describe_sat(vocab, args)
 
@@ -175,5 +176,3 @@ def image2caption(img_file):
 speaker, epoch, img_transforms = load_speaker("./server/config.json.txt", "./server/checkpoints/best_model.pt", with_data=False, verbose=True)
 device = torch.device("cpu")
 speaker = speaker.to(device)
-
-# a = image2caption('./img2.jpg')
