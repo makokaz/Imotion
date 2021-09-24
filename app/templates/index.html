@@ -38,7 +38,7 @@
 				oFReader.onloadend = function (oFRevent) {
 					var src = oFRevent.target.result;
 					$('#img').attr('src', src);
-					var url = getObjectURL(file)
+					var url = file
 					$.ajax({
 						type: 'POST',
 						url: '/',

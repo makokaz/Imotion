@@ -9,18 +9,17 @@ story = "I will tell you a story ..."
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html", title="Imotion", emotion=emotion, story=story)
+    return render_template("index.html", emotion=emotion, story=story)
 
 @app.route("/", methods=["POST", "GET"])
 def image2emotion():
     if request.method == "POST":
         img = request.form.get("img")
-        print(img)
-        # img_caption = image2caption(img)
-        # emotion = txt_to_emo(img_caption)
-        # TODO: Put caption to emotion-box in index.html
-        # emotion = img
-    return render_template("index.html", title="Imotion", emotion=emotion, story=story)
+        last_position = find_last(img, "\\") # you may change this dependending on the path style on you pc
+        img_file = "./image" + img[last_position:]
+        story = image2caption(img_file)
+        emotion = txt_to_emo(story)
+    return render_template("index.html", emotion=emotion, story=story)
 
 @app.route('/img', methods=["POST", "GET"])
 def home():
@@ -29,10 +28,15 @@ def home():
         print(img)
     return render_template("index.html")
 
-@app.route('/res', methods=['GET'])
-def txt_to_emo():
-    text = image2caption('./server/img2.jpg')
-    print(text)
+def txt_to_emo(text):
     preds = preprocess(text)
     response = generate_emo(preds)
-    return jsonify(result=response)
+    return response[0]
+
+def find_last(string,str):
+    last_position=-1
+    while True:
+        position=string.find(str,last_position+1)
+        if position==-1:
+            return last_position
+        last_position=position
