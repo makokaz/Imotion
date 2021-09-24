@@ -54,7 +54,8 @@ def load_speaker(args_file, model_ckp, with_data=False, override_args=None, verb
     args = read_saved_args(args_file, override_args=override_args, verbose=verbose)
 
     # Prepare empty model
-    vocab = Vocabulary.load(osp.join(args.data_dir, 'vocabulary.pkl'))
+    vocab = Vocabulary.load('./server/preprocessed/vocabulary.pkl')
+    
     print('Using a vocabulary of size', len(vocab))
     model = describe_sat(vocab, args)
 
@@ -145,8 +146,6 @@ def parse_speaker_arguments(notebook_options=None):
     parser.add_argument('--compute-nll', type=str2bool, default=False, help='Compute the negative-log-likelihood of '
                                                                             'the dataset under the the saved speaker model.')
 
-
-
     # Parse arguments
     if notebook_options is not None:  # Pass options directly
         args = parser.parse_args(notebook_options)
@@ -174,6 +173,6 @@ def image2caption(img_file):
     return next(iter(captions_predicted))
 
 # Load pretrained speaker & its corresponding train-val-test data. 
-speaker, epoch, img_transforms = load_speaker("server/config.json.txt", "server/checkpoints/best_model.pt", with_data=False, verbose=True)
+speaker, epoch, img_transforms = load_speaker("./server/config.json.txt", "./server/checkpoints/best_model.pt", with_data=False, verbose=True)
 device = torch.device("cpu")
 speaker = speaker.to(device)
