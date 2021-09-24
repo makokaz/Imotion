@@ -1,1 +1,7 @@
-*/__pycache__
+# generated files
+__pycache__
+.DS_Store
+.vscode/
+
+# best fit model must be either downloaded or trained yourself
+best_model.pt
