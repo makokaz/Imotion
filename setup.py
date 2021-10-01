@@ -6,10 +6,11 @@ setup(name='imotion',
       author='UTokyo Research Hackathon',
       author_email='None',
       license='MIT',
-      packages=['Imotion'],
+      #packages=['app', 'server'],
       install_requires=['Flask == 2.0.1',
                         'Flask-Cors == 3.0.10',
-                        'textblob == 0.15.3'],
+                        'textblob == 0.15.3',
+                        'python-datauri'],
       python_requires='>=3')
 
 import nltk

@@ -43,25 +43,29 @@
 						type: 'POST',
 						url: '/',
 						data: {
-							img: $("#file").val()
+							img: src
 						},
-						success: function () {
+						success: function (response) {
 							alert('Submitted image! Robots will change behavior...');
+							var emotion = document.getElementById('emotion');
+							emotion.innerHTML = response.emotion;
+							var story = document.getElementById('story');
+							story.innerHTML = response.story;
 						}
 					})
 				}
 			});
 		</script>
-		<script src="{{url_for('static', filename='three.js')}}"></script>
-		<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
-		<script src="{{url_for('static', filename='script.js')}}"></script>
-		</script>
 	</div>
 	<div id="display"  style="position:absolute; left:40px; bottom: 100px;">
 		<div><h1 id="emotion">{{ emotion }}</h1></div>
 		<div style="height:5vh; width:10vw">
-			<p style="font-size: large; font-weight: 500;">{{ story }}</p>
+			<p id="story" style="font-size: large; font-weight: 500;">{{ story }}</p>
 		</div>
+
+		<script src="{{url_for('static', filename='three.js')}}"></script>
+		<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+		<script src="{{url_for('static', filename='script.js')}}"></script>
 	</div>
 </body>
 

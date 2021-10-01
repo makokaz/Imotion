@@ -71,7 +71,7 @@ for(var arr_i=0;arr_i<num_bots; arr_i++){
 
 function animate() {
 	requestAnimationFrame( animate );
-	emotion = document.getElementById('emotion').value;
+	emotion = document.getElementById('emotion').innerHTML;
 	if(emotion==="sadness"){
 		t+=0.001
 		var step = 2*Math.PI / num_bots;

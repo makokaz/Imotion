@@ -28,8 +28,8 @@ from artemis.neural_models.show_attend_tell import \
 from artemis.utils.vocabulary import Vocabulary
 
 
-def custom_data_loader(img_file, img_transforms):
-    image_files = pd.Series([img_file])
+def custom_data_loader(img, img_transforms):
+    image_files = pd.Series([img])
     dummy = pd.Series(np.ones(len(image_files), dtype=int) * -1)
     emotions = dummy
 
@@ -168,8 +168,8 @@ def parse_speaker_arguments(notebook_options=None):
 def image2caption(img_file):
     annotate_loader = custom_data_loader(img_file, img_transforms)
     captions_predicted, attn_weights = versatile_caption_sampler(speaker, annotate_loader, device, 50, "argmax")
-    print(captions_predicted)
-    print('Done.')
+    # print(captions_predicted)
+    # print('Done.')
     return next(iter(captions_predicted))
 
 # Load pretrained speaker & its corresponding train-val-test data. 

@@ -24,7 +24,7 @@ tweets = pd.DataFrame(['She seems very happy in the picture, and you want to kno
 'She looks like a lady from that past that might have been a teacher (books).\nShe looks tired and I wondered how hard it must have been for them back then.',
 'The bright colors make a very unique scene for the interesting shapes.',
 'The way the image is presented, with large chunks of paint used to depict each of the subjects,\nmakes for a slight amount of confusion and an unsureness on the part of the viewer: what, exactly, was Kandinsky trying to depict during Autumn?'])
-print(tweets)
+# print(tweets)
 
 # Doing some preprocessing on the text
 tweets[0] = tweets[0].str.replace('[^\w\s]',' ')
@@ -38,12 +38,12 @@ tweet_count = count_vect.transform(tweets[0])
 
 #Predicting the emotion of the tweet using our already trained linear SVM
 tweet_pred = loaded_model.predict(tweet_count)
-print(tweet_pred)
+# print(tweet_pred)
 
 def preprocess(txt):
     t = str(txt)
     tweets = pd.DataFrame([t], columns=['str'])
-    print(tweets)
+    # print(tweets)
 
     # Doing some preprocessing on these tweets as done before
     tweets['str'] = tweets['str'].str.replace('[^\w\s]',' ')
@@ -72,7 +72,9 @@ def generate_emo(txt):
         elif i==5:
             print('Hate')
             res.append('anger')
-    
+        else: # default emotion
+            print('Deafult emotion: Surprise')
+            res.append('surprise')
     return res
 
 # app = Flask(__name__)
