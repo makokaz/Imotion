@@ -19,6 +19,8 @@ It understands emotions an external viewer might have while observing an image, 
 Inspiration for this idea comes from the following paper:
 > Santos, M., Egerstedt, M. From Motions to Emotions: Can the Fundamental Emotions be Expressed in a Robot Swarm?. Int J of Soc Robotics 13, 751–764 (2021). <https://doi.org/10.1007/s12369-020-00665-6>
 
+The name `Imotion` is a combination of `Image` and `Motion`.
+
 ## Getting started 🚀
 
 There are about three ways to start the Imotion webserver:
