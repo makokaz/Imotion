@@ -46,7 +46,7 @@ That's all! 🎉
 1. First, clone this project by
 
     ```bash
-    git clone --recurse-submodules https://github.com/makokaz/Imotion.git
+    git clone --recurse-submodules https://github.com/makokaz/imotion.git
     ```
 
 2. Create docker image
@@ -66,7 +66,7 @@ That's all! 🎉
 1. First, clone this project by
 
     ```bash
-    git clone --recurse-submodules https://github.com/makokaz/Imotion.git
+    git clone --recurse-submodules https://github.com/makokaz/imotion.git
     ```
 
 2. Pull the trained artemis model from [Google Drive](https://drive.google.com/uc?id=1MvEBUqFCDflL-Y8TllzYUe_-rivb8bmF) and put it in the folder `./server/checkpoints/best_model.pt`.
